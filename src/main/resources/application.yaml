@@ -29,7 +29,7 @@ spring:
     continue-on-error: false
     platform: h2
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:@java.io.tmpdir@/iesb;DB_CLOSE_ON_EXIT=FALSE;
+    url: jdbc:h2:@java.io.tmpdir@/iesb;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE;
     username: sa
     password:
     hikari:
@@ -69,6 +69,10 @@ spring:
 
 springdoc:
   show-actuator: false
+  writer-with-default-pretty-printer: true
+  swagger-ui:
+    display-request-duration: false
+    display-query-params: true
 
 management:
   endpoints:
