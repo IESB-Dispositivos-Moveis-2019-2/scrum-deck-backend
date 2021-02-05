@@ -1,12 +1,15 @@
 package br.iesb.controller;
 
+import br.iesb.model.dto.entrada.CadastroSprintDTO;
+import br.iesb.model.dto.saida.SprintDTO;
 import br.iesb.service.SprintService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequiredArgsConstructor
@@ -16,9 +19,24 @@ public class SprintController {
 
     private final SprintService service;
 
-    @GetMapping
-    private ResponseEntity<Void> teste() {
-        service.teste();
-        return ResponseEntity.noContent().build();
+    @PostMapping
+    @Operation(summary = "Cadastrar", description = "Cadastrar uma nova Sprint")
+    public ResponseEntity<SprintDTO> criarSprint(@Validated @RequestBody CadastroSprintDTO cadastroSprintDTO) {
+        final var dto = service.cadastrar(cadastroSprintDTO);
+
+        final var location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(dto.getId())
+                .toUri();
+
+        return ResponseEntity.created(location).body(dto);
+
+    }
+
+    @GetMapping("/{id}")
+    @Operation(summary = "Recuperar", description = "Recuperar uma Sprint por ID")
+    public ResponseEntity<SprintDTO> recuperarPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(service.recuperarPorId(id));
     }
 }

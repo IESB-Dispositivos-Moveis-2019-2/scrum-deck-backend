@@ -1,4 +1,4 @@
-package br.iesb.model;
+package br.iesb.model.entity;
 
 import lombok.Data;
 import lombok.Getter;
