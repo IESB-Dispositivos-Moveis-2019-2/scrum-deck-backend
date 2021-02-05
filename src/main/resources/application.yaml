@@ -1,0 +1,85 @@
+server:
+  port: 8080
+  compression:
+    enabled: true
+  http2:
+    enabled: true
+  shutdown: graceful
+  servlet:
+    application-display-name: @project.artifactId@
+    encoding:
+      charset: UTF-8
+      force: true
+
+spring:
+  application:
+    name: @project.artifactId@
+  web:
+    locale: pt_BR
+  mvc:
+    converters:
+      preferred-json-mapper: jackson
+
+  jackson:
+    date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+    default-property-inclusion: non_empty
+    locale: pt_BR
+
+  datasource:
+    continue-on-error: false
+    platform: h2
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:@java.io.tmpdir@/iesb;DB_CLOSE_ON_EXIT=FALSE;
+    username: sa
+    password:
+    hikari:
+      auto-commit: false
+      connection-init-sql: SELECT 1;
+      connection-test-query: SELECT 1;
+      minimum-idle: 0
+      maximum-pool-size: 10
+      connection-timeout: 30000
+      idle-timeout: 60000
+      leakDetectionThreshold: 10000
+      isolate-internal-queries: true
+
+  jpa:
+    database: h2
+    open-in-view: true
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none
+      use-new-id-generator-mappings: true
+      naming:
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+        current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
+
+  flyway:
+    enabled: false
+
+  h2:
+    console:
+      enabled: false
+
+springdoc:
+  show-actuator: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    root: info
+    br.iesb: debug
