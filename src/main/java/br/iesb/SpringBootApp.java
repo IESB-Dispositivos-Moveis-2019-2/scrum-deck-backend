@@ -26,6 +26,7 @@ public abstract class SpringBootApp extends SpringBootServletInitializer {
     protected static void onApplicationLoaded(ConfigurableApplicationContext ctx) {
         final var env = ctx.getEnvironment();
         try {
+            final var banco = env.getProperty("spring.datasource.url");
             final var serverPort = Optional.ofNullable(env.getProperty("server.port")).orElse("8080");
             final var contextPath = Optional.ofNullable(env.getProperty("server.servlet.context-path")).orElse(StringUtils.EMPTY);
             final var hostAddress = InetAddress.getLocalHost().getHostAddress();
@@ -47,6 +48,7 @@ public abstract class SpringBootApp extends SpringBootServletInitializer {
                      "\tExterno: http://{}:{} \n" +
                      "\tSwagger: http://{}:{} \n" +
                      "\tLocal Swagger: http://localhost:{} \n" +
+                     "\tURL JDBC: {} \n" +
                      StringUtils.LF +
                      "***" +
                      StringUtils.LF +
@@ -58,7 +60,8 @@ public abstract class SpringBootApp extends SpringBootServletInitializer {
                 serverAddress,
                 hostAddress,
                 serverAddress + "/swagger-ui.html",
-                serverAddress + "/swagger-ui.html");
+                serverAddress + "/swagger-ui.html",
+                banco);
 
         } catch (IOException e) {
             log.error("Falha ao executar aplicação...", e);

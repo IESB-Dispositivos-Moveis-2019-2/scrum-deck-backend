@@ -61,11 +61,11 @@ spring:
         current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
 
   flyway:
-    enabled: false
+    enabled: true
 
   h2:
     console:
-      enabled: false
+      enabled: true
 
 springdoc:
   show-actuator: false
