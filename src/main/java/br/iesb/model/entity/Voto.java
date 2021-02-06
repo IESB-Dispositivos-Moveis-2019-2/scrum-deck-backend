@@ -1,8 +1,6 @@
 package br.iesb.model.entity;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -35,9 +33,12 @@ public class Voto extends BaseEntity<Voto.PK> {
     private Desenvolvedor desenvolvedor;
 
     @Data
+    @Builder
     @Embeddable
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class PK implements Serializable {
-        private static final long serialVersionUID = 7684758573831407666L;
+        private static final long serialVersionUID = -3604370789197024307L;
 
         private Long idEstoria;
         private Long idDesenvolvedor;

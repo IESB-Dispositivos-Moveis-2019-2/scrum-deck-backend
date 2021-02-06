@@ -22,7 +22,6 @@ public class EstoriaController {
 
     private final EstoriaService service;
 
-
     @PostMapping
     @Operation(summary = "Cadastrar", description = "Cadastrar uma nova Estória de Usuário")
     public ResponseEntity<EstoriaDTO> cadastrar(@Validated @RequestBody CadastroEstoriaDTO cadastroEstoriaDTO) {
@@ -54,6 +53,12 @@ public class EstoriaController {
     @Operation(summary = "Estórias da Sprint", description = "Recuperar a lista de estórias de uma sprint")
     public ResponseEntity<List<EstoriaDTO>> recuperarPorSprint(@PathVariable Long idSprint) {
         return ResponseEntity.ok(service.recuperarPorSprint(idSprint));
+    }
+
+    @PutMapping("/{id}/encerrar-votacao")
+    @Operation(summary = "Encerrar Votação", description = "Encerra a coleta de votos de uma Estória")
+    public ResponseEntity<Integer> encerrarVotacao(@PathVariable Long id) {
+        return ResponseEntity.ok(service.encerrarVotacao(id));
     }
 
 }

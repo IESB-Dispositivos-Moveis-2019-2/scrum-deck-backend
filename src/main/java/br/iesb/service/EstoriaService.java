@@ -2,6 +2,7 @@ package br.iesb.service;
 
 import br.iesb.model.dto.entrada.CadastroEstoriaDTO;
 import br.iesb.model.dto.saida.EstoriaDTO;
+import br.iesb.model.entity.Voto;
 import br.iesb.model.mapper.EstoriaMapper;
 import br.iesb.repository.EstoriaRepository;
 import br.iesb.repository.SprintRepository;
@@ -9,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -63,5 +65,18 @@ public class EstoriaService {
         return dtos;
     }
 
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public Integer encerrarVotacao(Long id) {
+        var entity = repository.findById(id).orElseThrow(API_RESOURCE_NOTFOUND::resourceNotFoundException);
+        if (!CollectionUtils.isEmpty(entity.getVotos())) {
+            final var soma = entity.getVotos().stream().map(Voto::getPontos).reduce(Integer::sum).orElse(0);
+            final var media = soma / entity.getVotos().size();
+            entity.setPontuacao(media);
+        }else {
+            entity.setPontuacao(0);
+        }
+        entity = repository.save(entity);
+        return entity.getPontuacao();
+    }
 
 }
