@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @Table(name = "sprint")
 public class Sprint extends BaseEntity<Long> {
-    private static final long serialVersionUID = 1702768023669833410L;
+    private static final long serialVersionUID = -535037529850093915L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +23,7 @@ public class Sprint extends BaseEntity<Long> {
     @Column(name = "link")
     private String link;
 
-    @OneToMany(mappedBy = "sprint", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "sprint", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Estoria> estorias;
 
 }

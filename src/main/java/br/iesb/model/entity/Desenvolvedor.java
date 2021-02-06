@@ -23,7 +23,7 @@ public class Desenvolvedor extends BaseEntity<Long> {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @OneToMany(mappedBy = "desenvolvedor", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "desenvolvedor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Voto> votos;
 
 }

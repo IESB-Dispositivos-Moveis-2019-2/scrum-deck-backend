@@ -23,7 +23,7 @@ CREATE TABLE desenvolvedor (
 CREATE TABLE voto (
     id_estoria BIGINT NOT NULL,
     id_desenvolvedor BIGINT NOT NULL,
-    voto INT NOT NULL,
+    pontos INT NOT NULL,
     data_hora DATETIME NOT NULL,
 
     CONSTRAINT PK_VOTO PRIMARY KEY (id_estoria, id_desenvolvedor),

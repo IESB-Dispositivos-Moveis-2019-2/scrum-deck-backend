@@ -11,6 +11,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/sprint")
@@ -18,6 +20,12 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 public class SprintController {
 
     private final SprintService service;
+
+    @GetMapping
+    @Operation(summary = "Recuperar", description = "Recuperar todas as Sprints cadastradas")
+    public ResponseEntity<List<SprintDTO>> recuperarTodos() {
+        return ResponseEntity.ok(service.recuperarTodos());
+    }
 
     @PostMapping
     @Operation(summary = "Cadastrar", description = "Cadastrar uma nova Sprint")

@@ -11,11 +11,11 @@ import java.util.List;
 @Setter
 @Table(name = "estoria")
 public class Estoria extends BaseEntity<Long> {
-    private static final long serialVersionUID = -1055051600529365347L;
+    private static final long serialVersionUID = -7479330826942732683L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_sprint", referencedColumnName = "id", nullable = false)
@@ -30,6 +30,6 @@ public class Estoria extends BaseEntity<Long> {
     @Column(name = "pontuacao")
     private Integer pontuacao;
 
-    @OneToMany(mappedBy = "estoria", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "estoria", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Voto> votos;
 }

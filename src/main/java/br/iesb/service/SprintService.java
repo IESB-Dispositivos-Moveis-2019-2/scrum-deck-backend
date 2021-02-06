@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static br.iesb.message.CoreMessageProperty.API_RESOURCE_NOTFOUND;
 
 @Service
@@ -30,4 +32,7 @@ public class SprintService {
         return mapper.toDto(entity);
     }
 
+    public List<SprintDTO> recuperarTodos() {
+        return mapper.toDto(repository.findAll());
+    }
 }

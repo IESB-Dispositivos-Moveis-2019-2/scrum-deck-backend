@@ -6,12 +6,9 @@ import org.apache.commons.lang3.ArrayUtils;
 
 @Getter
 @RequiredArgsConstructor
-public enum CoreMessageProperty implements IMessageProperty {
+public enum BusinessMessageProperty implements IMessageProperty {
 
-    API_ACCESS_FORBIDDEN("api.access-forbidden"),
-    API_UNDENTIFIED_ERROR("api.unidentified-error"),
-    API_RESOURCE_NOTFOUND("api.resource-notfound");
-
+    ESTORIA_SPRINT_NAO_ENCONTRADA("estoria.sprint-nao-encontrada");
 
     private final String key;
 
