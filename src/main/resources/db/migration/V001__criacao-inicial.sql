@@ -1,14 +1,14 @@
 CREATE TABLE sprint (
     id IDENTITY NOT NULL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
-    link VARCHAR(255)
+    link VARCHAR_IGNORECASE(255)
 );
 
 CREATE TABLE estoria (
     id IDENTITY NOT NULL PRIMARY KEY,
     id_sprint BIGINT NOT NULL,
     nome VARCHAR(100) NOT NULL,
-    link VARCHAR(255),
+    link VARCHAR_IGNORECASE(255),
     pontuacao INT,
 
     CONSTRAINT FK_SPRINT FOREIGN KEY (id_sprint) REFERENCES sprint (id)
@@ -17,7 +17,7 @@ CREATE TABLE estoria (
 CREATE TABLE desenvolvedor (
     id IDENTITY NOT NULL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
-    email VARCHAR(255) NOT NULL
+    email VARCHAR_IGNORECASE(255) NOT NULL
 );
 
 CREATE TABLE voto (
