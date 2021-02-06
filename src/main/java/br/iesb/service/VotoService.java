@@ -14,7 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
-import static br.iesb.message.BusinessMessageProperty.*;
+import static br.iesb.message.BusinessMessageProperty.VOTO_DESENVOLVEDOR_NAO_ENCONTRADO;
+import static br.iesb.message.BusinessMessageProperty.VOTO_ESTORIA_NAO_ENCONTRADA;
 
 @Service
 @RequiredArgsConstructor
@@ -37,15 +38,13 @@ public class VotoService {
                 .findById(cadastroVotoDTO.getIdDesenvolvedor())
                 .orElseThrow(VOTO_DESENVOLVEDOR_NAO_ENCONTRADO::resourceNotFoundException);
 
-        if (estoria.getPontuacao() != null) {
-            throw VOTO_ESTORIA_FECHADA.businessException();
-        }
-
-        var voto = mapper.fromRegister(cadastroVotoDTO);
-        voto.setId(Voto.PK.builder().idEstoria(estoria.getId()).idDesenvolvedor(desenvolvedor.getId()).build());
+        final var pk = Voto.PK.builder().idEstoria(cadastroVotoDTO.getIdEstoria()).idDesenvolvedor(cadastroVotoDTO.getIdDesenvolvedor()).build();
+        var voto = repository.findById(pk).orElse(mapper.fromRegister(cadastroVotoDTO));
+        voto.setId(pk);
         voto.setEstoria(estoria);
         voto.setDesenvolvedor(desenvolvedor);
         voto.setDataHora(LocalDateTime.now());
+        voto.setPontos(cadastroVotoDTO.getPontos());
 
         voto = repository.save(voto);
 
