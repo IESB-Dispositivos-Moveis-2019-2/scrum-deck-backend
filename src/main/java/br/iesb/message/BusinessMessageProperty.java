@@ -8,7 +8,8 @@ import org.apache.commons.lang3.ArrayUtils;
 @RequiredArgsConstructor
 public enum BusinessMessageProperty implements IMessageProperty {
 
-    ESTORIA_SPRINT_NAO_ENCONTRADA("estoria.sprint-nao-encontrada");
+    ESTORIA_SPRINT_NAO_ENCONTRADA("estoria.sprint-nao-encontrada"),
+    DESENVOLVEDOR_EMAIL_JA_CADASTRADO("desenvolvedor.email-ja-cadastrado");
 
     private final String key;
 
