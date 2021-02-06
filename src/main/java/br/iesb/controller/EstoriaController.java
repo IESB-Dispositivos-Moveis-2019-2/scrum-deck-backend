@@ -6,6 +6,7 @@ import br.iesb.service.EstoriaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.CacheControl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +41,13 @@ public class EstoriaController {
     @Operation(summary = "Recuperar", description = "Recuperar uma Estória por ID")
     public ResponseEntity<EstoriaDTO> recuperar(@PathVariable Long id) {
         return ResponseEntity.ok(service.recuperar(id));
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Excluir", description = "Excluir uma Estória por ID")
+    public ResponseEntity<Void> excluir(@PathVariable Long id) {
+        service.excluir(id);
+        return ResponseEntity.noContent().cacheControl(CacheControl.noCache()).build();
     }
 
     @GetMapping("/sprint/{idSprint}")

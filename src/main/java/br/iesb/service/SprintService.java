@@ -27,6 +27,14 @@ public class SprintService {
         return mapper.toDto(repository.save(entity));
     }
 
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void excluir(Long id) {
+        if (!repository.existsById(id)) {
+            throw API_RESOURCE_NOTFOUND.resourceNotFoundException();
+        }
+        repository.deleteById(id);
+    }
+
     public SprintDTO recuperarPorId(Long id) {
         final var entity = repository.findById(id).orElseThrow(API_RESOURCE_NOTFOUND::resourceNotFoundException);
         return mapper.toDto(entity);

@@ -6,6 +6,7 @@ import br.iesb.service.SprintService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.CacheControl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +41,13 @@ public class SprintController {
 
         return ResponseEntity.created(location).body(dto);
 
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Excluir", description = "Excluir uma Sprint por ID")
+    public ResponseEntity<Void> excluir(@PathVariable Long id) {
+        service.excluir(id);
+        return ResponseEntity.noContent().cacheControl(CacheControl.noCache()).build();
     }
 
     @GetMapping("/{id}")

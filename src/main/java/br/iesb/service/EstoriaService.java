@@ -38,6 +38,14 @@ public class EstoriaService {
         return dto;
     }
 
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void excluir(Long id) {
+        if (!repository.existsById(id)) {
+            throw API_RESOURCE_NOTFOUND.resourceNotFoundException();
+        }
+        repository.deleteById(id);
+    }
+
     public EstoriaDTO recuperar(Long id) {
         final var entity = repository.findById(id).orElseThrow(API_RESOURCE_NOTFOUND::resourceNotFoundException);
         final var dto = mapper.toDto(entity);
