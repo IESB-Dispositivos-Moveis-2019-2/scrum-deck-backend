@@ -6,7 +6,7 @@ import br.iesb.message.IMessageProperty;
 import java.util.Optional;
 
 public abstract class IESBException extends RuntimeException {
-    private static final long serialVersionUID = 1032608034639505500L;
+    private static final long serialVersionUID = -3485074360659570937L;
 
     private final IMessageProperty messageProperty;
 
@@ -35,7 +35,7 @@ public abstract class IESBException extends RuntimeException {
     }
 
     protected IESBException(IMessageProperty messageProperty) {
-        super();
+        super(messageProperty.message());
         this.messageProperty = messageProperty;
     }
 
@@ -50,7 +50,7 @@ public abstract class IESBException extends RuntimeException {
     }
 
     protected IESBException(IMessageProperty messageProperty, Throwable cause) {
-        super(cause);
+        super(messageProperty.message(), cause);
         this.messageProperty = messageProperty;
     }
 }
