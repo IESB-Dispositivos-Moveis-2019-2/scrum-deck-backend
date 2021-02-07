@@ -31,10 +31,10 @@ jobs:
         username: $GITHUB_ACTOR
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Build with Maven
+    - name: Maven Build and Docker
       run: |
           mvn clean package -B -DskipTests --file pom.xml -T $(nproc)
-          docker build --compress -t docker.pkg.github.com/IESB-Dispositivos-Moveis-2019-2/scrum-deck-backend/scrum-deck-backend:$GITHUB_ACTION .
-          docker push docker.pkg.github.com/IESB-Dispositivos-Moveis-2019-2/scrum-deck-backend/scrum-deck-backend:$GITHUB_ACTION
+          docker build --compress -t docker.pkg.github.com/iesb-dispositivos-moveis-2019-2/scrum-deck-backend/scrum-deck-backend:$GITHUB_ACTION .
+          docker push docker.pkg.github.com/iesb-dispositivos-moveis-2019-2/scrum-deck-backend/scrum-deck-backend:$GITHUB_ACTION
 
 
