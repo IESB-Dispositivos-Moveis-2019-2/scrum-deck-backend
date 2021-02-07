@@ -16,26 +16,23 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 11
+
     - name: Cache Maven packages
       uses: actions/cache@v2
       with:
         path: ~/.m2
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
+
     - name: Build with Maven
       run: mvn clean package -B -DskipTests --file pom.xml -T $(nproc)
 
-  docker:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Docker
-        uses: docker/build-push-action@v2
-        with:
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          registry: docker.pkg.github.com
-          repository: iesb-dispositivos-moveis-2019-2/scrum-deck-backend/scrum-deck-backend
-          tag_with_ref: true
+    - name: Docker
+      uses: docker/build-push-action@v2
+      with:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        registry: docker.pkg.github.com
+        repository: iesb-dispositivos-moveis-2019-2/scrum-deck-backend/scrum-deck-backend
+        tag_with_ref: true
 
