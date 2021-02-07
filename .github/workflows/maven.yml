@@ -26,11 +26,12 @@ jobs:
       run: mvn clean package -B -DskipTests --file pom.xml -T $(nproc)
 
   docker:
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
       - name: Docker
-        uses: docker/build-push-action@v1
+        uses: docker/build-push-action@v2
         with:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
