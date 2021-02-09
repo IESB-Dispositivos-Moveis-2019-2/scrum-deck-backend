@@ -14,12 +14,24 @@ consumo dele o nosso objeto de estudo.
 
 ## Como usar?
 
-Você tem duas opções:
+Você tem três opções:
 
-1. Baixar o código e executar (Só é recomendado caso você tenha intimidade com Java e com Spring Boot);
-2. Executar a imagem Docker que foi disponibilizada (opção recomendada)
+1. Usar on-line (ambiente compartilhado com outros alunos, não há segregação de registros)
+2. Baixar o código e executar (Só é recomendado caso você tenha intimidade com Java e com Spring Boot);
+3. Executar a imagem Docker que foi disponibilizada (opção recomendada)
 
 Vamos a elas...
+
+### Usar on-line
+
+Esse é o jeito mais fácil, porém apresenta um grande ponto negativo: o ambiente
+é compartilhado com todos. Os dados manipulados por um, podem ser manipulados por 
+qualquer outro.
+
+A maior utilidade desse ambiente é consultar a documentação da API, antes de usar 
+umas das opções 2 ou 3.
+
+Para acessar, basta clicar: [https://scrum-deck-backend.herokuapp.com/swagger-ui](https://scrum-deck-backend.herokuapp.com/swagger-ui)
 
 ### Executando à partir do código-fonte
 
